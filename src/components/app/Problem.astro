@@ -1,0 +1,24 @@
+---
+import Background from "../../utils/Background.astro";
+---
+
+<section>
+    <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        <div class="order-last md:order-first">
+            <Background />
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                Desafios sin
+                <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+                    Estrategia Digital
+                </span>
+            </h2>
+            <p class="mb-6 font-normal text-gray-900 md:text-lg dark:text-gray-100">
+                La ausencia de un equipo especializado en desarrollo de software y marketing puede obstaculizar
+                el crecimiento de tu negocio en el entorno digital, limitando la visibilidad, la interacción con
+                la audiencia y la adaptabilidad a las tendencias del mercado.
+            </p>
+        </div>
+        <img class="w-full dark:hidden order-first md:order-last" src="/src/img/problem.png" alt="Imagen de Problema">
+        <img class="w-full hidden dark:block order-first md:order-last" src="/src/img/problem.png" alt="Imagen de Problema">
+    </div>
+</section>
