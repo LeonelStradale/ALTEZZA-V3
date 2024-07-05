@@ -1,7 +1,7 @@
 export const works = [
   {
     id: "sci-benmac",
-    image: "/src/img/sci-benmac.png",
+    image: "/public/img/sci-benmac.png",
     category: "Software",
     name: "SCI - BENMAC",
     description:
@@ -12,7 +12,7 @@ export const works = [
   },
   {
     id: "scag-utzac",
-    image: "/src/img/scag-utzac.png",
+    image: "/public/img/scag-utzac.png",
     category: "Software",
     name: "SCAG - UTZAC",
     description:
@@ -23,7 +23,7 @@ export const works = [
   },
   {
     id: "e-commerce",
-    image: "/src/img/e-commerce.png",
+    image: "/public/img/e-commerce.png",
     category: "Software",
     name: "E-Commerce",
     description:
