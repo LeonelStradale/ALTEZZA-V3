@@ -84,4 +84,9 @@
             }
         }
     });
+
+    document.addEventListener('astro:after-swap', function () {
+        if (localStorage.getItem('color-theme') === 'dark')
+        document.documentElement.classList.toggle('dark', true);
+    });
 </script>
