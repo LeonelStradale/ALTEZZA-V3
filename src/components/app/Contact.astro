@@ -8,7 +8,7 @@
             permitiéndonos entender tus requisitos y ofrecerte una propuesta adaptada a tus
             necesidades.
         </p>
-        <form action="#" method="POST">
+        <form name="contact" method="POST" data-netlify="true">
             <!-- Name -->
             <div class="mb-4">
                 <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -70,12 +70,13 @@
                 <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Descripción
                 </label>
-                <textarea id="message" rows="4" name="description"
+                <textarea id="message" rows="4" name="message"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Escribe aquí la descripción de tu proyecto..." required></textarea>
             </div>
+            <!-- Hidden -->
             <div class="flex justify-end">
-                <button
+                <button type="submit"
                     class="inline-flex justify-center items-center py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                     Enviar Mensaje
                     <i class="fa-solid fa-paper-plane ml-1"></i>
