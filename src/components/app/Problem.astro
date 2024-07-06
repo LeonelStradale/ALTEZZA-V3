@@ -2,7 +2,7 @@
 import Background from "../../utils/Background.astro";
 ---
 
-<section>
+<section id="problem" class="opacity-0 transition-opacity duration-700 ease-out">
     <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
         <div class="order-last md:order-first">
             <Background />
@@ -22,3 +22,27 @@ import Background from "../../utils/Background.astro";
         <img class="w-full hidden dark:block order-first md:order-last" src="/img/problem.png" alt="Imagen de Problema">
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const section = document.getElementById("problem");
+  
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+      };
+  
+      const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            observer.unobserve(entry.target); 
+          }
+        });
+      };
+  
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
+      observer.observe(section);
+    });
+</script>
