@@ -6,7 +6,7 @@ export const works = [
     name: "SCI - BENMAC",
     description:
       "Sistema para el Control de Impresiones dentro de la escuela normal BENMAC.",
-    url: "impresiones.benmac.edu.mx",
+    url: "https://impresiones.benmac.edu.mx",
     author: "Edgar Leonel Acevedo Cuevas",
     year: 2023,
   },
@@ -16,8 +16,8 @@ export const works = [
     category: "Software",
     name: "SCAG - UTZAC",
     description:
-      "Sistema para el Control de Asistencia dentro del Gimnasio de la UTZAC.",
-    url: "#",
+      "Sistema para el Control de Asistencia del Gimnasio dentro de la UTZAC.",
+    url: "",
     author: "Edgar Leonel Acevedo Cuevas",
     year: 2023,
   },
@@ -28,7 +28,18 @@ export const works = [
     name: "E-Commerce",
     description:
       "Tienda Online para productos en general profesional personalizable.",
-    url: "#",
+    url: "",
+    author: "Edgar Leonel Acevedo Cuevas",
+    year: 2024,
+  },
+  {
+    id: "library-assistant",
+    image: "/img/library-assistant.png",
+    category: "Software",
+    name: "Library Assistant",
+    description:
+      "Sistema para el Control de Asistencia de la Biblioteca dentro de la UTZAC.",
+    url: "",
     author: "Edgar Leonel Acevedo Cuevas",
     year: 2024,
   },

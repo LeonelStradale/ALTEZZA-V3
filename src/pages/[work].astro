@@ -31,17 +31,22 @@ if (!info) {
                 <h1 class="mt-4 max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                     {info.name}
                 </h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 text-lg dark:text-gray-400">
+                    Desarrollado por: {info.author}, en el año {info.year}.
+                </p>
+                <p class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-200">
                     {info.description}
                 </p>
-                <div class="flex items-center">
-                    <a
-                        href={info.url}
-                        class="z-10 text-white sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center">
-                        Ir al Sitio
-                        <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
-                    </a>
-                </div>
+                {info.url && (
+                    <div class="flex items-center">
+                        <a
+                            target="_blank" href={info.url}
+                            class="z-10 text-white sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center">
+                            Ir al Sitio
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                        </a>
+                    </div>
+                )}
             </div>    
         </div>
     </section>
