@@ -67,74 +67,93 @@
 </header>
 
 <script>
-    var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.querySelector('[data-collapse-toggle="mobile-menu-2"]');
+        const mobileMenu = document.getElementById('mobile-menu-2');
+        const menuLinks = mobileMenu.querySelectorAll('a');
 
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        themeToggleLightIcon.classList.remove('hidden');
-    } else {
-        themeToggleDarkIcon.classList.remove('hidden');
-    }
-
-    var themeToggleBtn = document.getElementById('theme-toggle');
-
-    themeToggleBtn.addEventListener('click', function() {
-
-        themeToggleDarkIcon.classList.toggle('hidden');
-        themeToggleLightIcon.classList.toggle('hidden');
-
-        if (localStorage.getItem('color-theme')) {
-            if (localStorage.getItem('color-theme') === 'light') {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            }
-
-        } else {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
         }
-    });
 
-    document.addEventListener('astro:after-swap', function () {
-        if (localStorage.getItem('color-theme') === 'dark')
-        document.documentElement.classList.toggle('dark', true);
-    });
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        }
 
-    document.addEventListener("DOMContentLoaded", function () {
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        var themeToggleBtn = document.getElementById('theme-toggle');
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        document.addEventListener('astro:after-swap', function () {
+            if (localStorage.getItem('color-theme') === 'dark')
+            document.documentElement.classList.toggle('dark', true);
+        });
+
         const sections = document.querySelectorAll("section");
         const navLi = document.querySelectorAll("nav ul li a");
 
         const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
         };
 
         const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-            navLi.forEach(link => {
-                link.classList.remove("text-primary-700", "dark:text-primary-600");
-                if (link.getAttribute("href").substring(1) === entry.target.id) {
-                link.classList.add("text-primary-700", "dark:text-primary-600");
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLi.forEach(link => {
+                        link.classList.remove("text-primary-700", "dark:text-primary-600");
+                        if (link.getAttribute("href").substring(1) === entry.target.id) {
+                            link.classList.add("text-primary-700", "dark:text-primary-600");
+                        }
+                    });
                 }
             });
-            }
-        });
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
 
         sections.forEach(section => {
-        observer.observe(section);
+            observer.observe(section);
         });
     });
 </script>
