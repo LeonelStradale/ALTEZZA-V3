@@ -8,7 +8,9 @@
             permitiéndonos entender tus requisitos y ofrecerte una propuesta adaptada a tus
             necesidades.
         </p>
-        <form name="contact" method="POST" data-netlify="true" action="/success">
+        <form method="POST" id="form">
+            <!-- Hidden -->
+            <input type="hidden" name="access_key" value="62ba1769-265c-4505-8703-ecb9044c7125">
             <!-- Name -->
             <div class="mb-4">
                 <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -44,25 +46,7 @@
                     </div>
                     <input type="email" id="input-group-2" name="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="ej. nombre@gmail.com" required>
-                </div>
-            </div>
-            <!-- Phone -->
-            <div class="mb-4">
-                <label for="phone-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Télefono
-                </label>
-                <div class="relative mb-3">
-                    <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
-                            <path
-                                d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z" />
-                        </svg>
-                    </div>
-                    <input type="tel" id="phone-input" aria-describedby="helper-text-explanation" name="phone"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="123-456-7890" required>
+                        placeholder="nombre@gmail.com" required>
                 </div>
             </div>
             <!-- Message -->
@@ -74,7 +58,7 @@
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Escribe aquí la descripción de tu proyecto..." required></textarea>
             </div>
-            <!-- Hidden -->
+            <div class="text-gray-900 dark:text-white" id="result"></div>
             <div class="flex justify-end">
                 <button type="submit"
                     class="inline-flex justify-center items-center py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
@@ -85,3 +69,46 @@
         </form>
     </div>
 </section>
+
+<script is:inline>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', function(e) {
+        const formData = new FormData(form);
+        e.preventDefault();
+    
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+    
+        result.innerHTML = "Please wait..."
+    
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = json.message;
+                } else {
+                    console.log(response);
+                    result.innerHTML = json.message;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Something went wrong!";
+            })
+            .then(function() {
+                form.reset();
+                setTimeout(() => {
+                    result.style.display = "none";
+                }, 3000);
+            });
+    });
+</script>
